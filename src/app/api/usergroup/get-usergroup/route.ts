@@ -8,7 +8,7 @@ export async function GET(req: NextRequest) {
 
   try {
     const res = await axios.get(
-      `${process.env.SERVICE_URL}/v2/user-group/admisi`,
+      `${process.env.SERVICE_URL}/v2/user-group/it-center`,
       {
         headers: {
           Authorization: `${authHeader}`,

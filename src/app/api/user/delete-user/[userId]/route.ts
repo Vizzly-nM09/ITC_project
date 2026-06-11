@@ -11,7 +11,7 @@ export async function DELETE(req: NextRequest) {
 
   try {
     const res = await axios.delete(
-      `${process.env.SERVICE_URL}/v2/user/admisi/${userId}`,
+      `${process.env.SERVICE_URL}/v2/user/it-center/${userId}`,
       {
         headers: {
           Authorization: `${auth}`,

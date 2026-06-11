@@ -10,7 +10,7 @@ export async function DELETE(
 
   try {
     const res = await axios.delete(
-      `${process.env.SERVICE_URL}/v2/modul/admisi/${modulId}`,
+      `${process.env.SERVICE_URL}/v2/modul/it-center/${modulId}`,
       {
         headers: {
           Authorization: `${auth}`,

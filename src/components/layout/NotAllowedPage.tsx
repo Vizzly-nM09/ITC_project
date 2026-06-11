@@ -4,7 +4,7 @@ export default function NotAllowedPage() {
   return (
     <main className="grid place-items-center px-6 py-24 sm:py-32 lg:px-8">
       <div className="text-center">
-        <p className="text-base font-semibold text-red-600">401</p>
+        <p className="text-base font-semibold text-red-600">403</p>
         <h1 className="mt-4 text-balance text-5xl font-semibold tracking-tight text-gray-900 sm:text-7xl dark:text-gray-100">
           Hak Akses Dibatasi
         </h1>

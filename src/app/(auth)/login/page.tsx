@@ -3,24 +3,20 @@ import React, { useState } from "react";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
-import { Highlight } from "@/components/ui/hero-highlight";
-import Image from "next/image";
-import Link from "next/link";
 import { signIn } from "next-auth/react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useNotifikasi } from "@/store/useNotifikasi";
 import TopNavbarLogin from "@/components/layout/TopNavbarLogin";
-import WelcomeSectionLogin from "@/components/layout/WelcomeSectionLogin";
 import ContactUsLogin from "@/components/layout/ContactUsLogin";
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isSuccess, setSuccess] = useState(false);
   const { replace } = useRouter();
   const showNotification = useNotifikasi.getState().show;
-  const pathname = usePathname();
   const searchParams = useSearchParams();
   const callbackUrl = searchParams.get("callbackUrl");
 
@@ -43,7 +39,7 @@ export default function Login() {
         redirect: false,
         email: email,
         password: password,
-        asal_sistem: "admisi",
+        asal_sistem: "it_center",
       });
       setIsLoading(false);
       if (!res?.error) {
@@ -80,20 +76,20 @@ export default function Login() {
   };
 
   return (
-    <>
-      <div className="flex flex-row flex-wrap items-start min-h-screen bg-[#F9F9F9] dark:bg-[#212121] pb-1 px-10 pt-10">
+    <div className="flex flex-col min-h-screen bg-[#F9F9F9] dark:bg-[#212121] px-4 md:px-10 py-6">
+      <div className="w-full">
         <TopNavbarLogin />
+      </div>
 
-        <WelcomeSectionLogin />
-
-        <div className="md:-mt-24 rounded-2xl shadow-xl p-4 md:p-8 bg-white dark:bg-[#171717] w-full lg:w-96 relative">
-          <div className="flex flex-row items-center justify-between">
-            <h1 className="font-bold text-xl text-neutral-900 dark:text-white">
+      <div className="flex-1 flex flex-col items-center justify-center py-10">
+        <div className="rounded-2xl shadow-xl p-6 md:p-8 bg-white dark:bg-[#171717] w-full max-w-md relative">
+          <div className="flex flex-row items-center justify-between mb-8">
+            <h1 className="font-bold text-2xl text-neutral-900 dark:text-white">
               Masuk
             </h1>
           </div>
-          <form className="my-8" onSubmit={handleSubmit}>
-            <LabelInputContainer className="mb-4">
+          <form onSubmit={handleSubmit}>
+            <LabelInputContainer className="mb-5">
               <Label htmlFor="email">Email</Label>
               <Input
                 id="email"
@@ -106,40 +102,53 @@ export default function Login() {
                 className="bg-white"
               />
             </LabelInputContainer>
-            <LabelInputContainer className="mb-4">
+            <LabelInputContainer className="mb-8">
               <Label htmlFor="password">Password</Label>
-              <Input
-                id="password"
-                placeholder="••••••••"
-                type="password"
-                name="password"
-                autoComplete="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="bg-white"
-              />
+              <div className="relative w-full">
+                <Input
+                  id="password"
+                  placeholder="••••••••"
+                  type={showPassword ? "text" : "password"}
+                  name="password"
+                  autoComplete="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  className="bg-white pr-10"
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 focus:outline-none"
+                  aria-label={showPassword ? "Sembunyikan password" : "Tampilkan password"}
+                >
+                  <i className={`bx ${showPassword ? 'bx-hide' : 'bx-show'} text-xl`}></i>
+                </button>
+              </div>
             </LabelInputContainer>
-            <div>
-              <p className="text-sm text-neutral-900 dark:text-white text-end"></p>
-            </div>
+
+            
             <button
-              className={`flex flex-row items-center border-none justify-center btn btn-block btn-sm rounded-lg bg-[#2A3955] text-[#F8B600] mb-3 ${
+              className={`flex flex-row items-center border-none justify-center btn btn-block rounded-lg bg-[#2A3955] text-[#F8B600] ${
                 isLoading ? "cursor-not-allowed" : ""
-              } hover:bg-[#1f2a40] hover:text-white`}
+              } hover:bg-[#1f2a40] hover:text-white py-3`}
               type="submit"
               disabled={isLoading}
             >
               {isLoading ? (
                 <>
-                  <span className="bx bx-loader bx-spin"></span> Memuat...
+                  <span className="bx bx-loader bx-spin mr-2 text-lg"></span>{" "}
+                  Memuat...
                 </>
               ) : (
                 <>
                   {!isSuccess ? (
-                    <>Masuk &rarr;</>
+                    <span className="font-semibold text-base">
+                      Masuk &rarr;
+                    </span>
                   ) : (
                     <>
-                      <span className="bx bx-loader bx-spin"></span> Berhasil
+                      <span className="bx bx-loader bx-spin mr-2 text-lg"></span>{" "}
+                      Berhasil
                     </>
                   )}
                 </>
@@ -147,10 +156,12 @@ export default function Login() {
             </button>
           </form>
 
-          <ContactUsLogin />
+          <div className="mt-10 border-t border-gray-100 dark:border-gray-800 pt-6">
+            <ContactUsLogin />
+          </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }
 

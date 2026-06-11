@@ -7,7 +7,7 @@ export async function POST(req: NextRequest) {
 
   try {
     const res = await axios.put(
-      `${process.env.SERVICE_URL}/v2/user/admisi`,
+      `${process.env.SERVICE_URL}/v2/user/it-center`,
       body,
       {
         headers: {

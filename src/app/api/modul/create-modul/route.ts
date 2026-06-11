@@ -7,7 +7,7 @@ export async function PUT(req: NextRequest) {
 
   try {
     const res = await axios.put(
-      `${process.env.SERVICE_URL}/v2/modul/admisi`,
+      `${process.env.SERVICE_URL}/v2/modul/it-center`,
       body,
       {
         headers: {

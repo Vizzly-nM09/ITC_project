@@ -7,7 +7,7 @@ export async function GET(req: NextRequest) {
   const authHeader = req.headers.get("authorization");
 
   try {
-    const res = await axios.get(`${process.env.SERVICE_URL}/v2/user/admisi`, {
+    const res = await axios.get(`${process.env.SERVICE_URL}/v2/user/it-center`, {
       headers: {
         Authorization: `${authHeader}`,
       },

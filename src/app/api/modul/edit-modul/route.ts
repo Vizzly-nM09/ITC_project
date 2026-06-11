@@ -7,7 +7,7 @@ export async function PATCH(req: NextRequest) {
 
   try {
     const res = await axios.patch(
-      `${process.env.SERVICE_URL}/v2/modul/admisi`,
+      `${process.env.SERVICE_URL}/v2/modul/it-center`,
       body,
       {
         headers: {

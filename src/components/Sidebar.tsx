@@ -32,7 +32,7 @@ export default function Sidebar({
         "/api/modul/getModulesAccess",
         {
           group_id: session.user?.groupId,
-          asal_sistem: "admisi",
+          asal_sistem: "it_center",
         },
         {
           headers: {
@@ -119,7 +119,7 @@ export default function Sidebar({
                 {session?.user?.groupName}
               </span>
               <span className="text-xs font-light text-white">
-                New Admission Platform
+                IT Center Platform
               </span>
               <span className="text-xs font-light text-white">
                 Universitas Internasional Batam
